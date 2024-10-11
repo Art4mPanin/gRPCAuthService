@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package auth;
+
+option go_package = "/auth;auth";
+
+service Auth {
+  rpc Login (LoginRequest) returns (LoginResponse);
+  rpc Register (RegisterRequest) returns (RegisterResponse);
+  rpc GetMe (GetMeRequest) returns (GetMeResponse);
+}
+
+message LoginRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message LoginResponse {
+  User user = 1;
+  string access_token = 2;
+  string refresh_token = 3;
+}
+
+message User {
+  int32 id =1;
+  string username = 2;
+  string email = 3;
+  string hashed_password = 4;
+  bool is_superuser = 5;
+}
+
+message RegisterRequest {
+  string username = 1;
+  string email = 2;
+  string password = 3;
+}
+
+message RegisterResponse {
+  User user = 1;
+  string access_token = 2;
+  string refresh_token = 3;
+}
+message GetMeRequest {
+  string Auth_JWT_Header = 1;
+}
+message GetMeResponse {
+  User user = 1;
+}
