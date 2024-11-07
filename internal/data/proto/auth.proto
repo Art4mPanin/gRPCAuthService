@@ -8,6 +8,10 @@ service Auth {
   rpc Login (LoginRequest) returns (LoginResponse);
   rpc Register (RegisterRequest) returns (RegisterResponse);
   rpc GetMe (GetMeRequest) returns (GetMeResponse);
+  rpc Validate (ValidateRequest) returns (ValidateResponse);
+  rpc Refresh (RefreshRequest) returns (RefreshResponse);
+
+//  todo: ping
 }
 
 message LoginRequest {
@@ -45,4 +49,17 @@ message GetMeRequest {
 }
 message GetMeResponse {
   User user = 1;
+}
+message ValidateRequest {
+  string Auth_JWT_Header = 1;
+}
+message ValidateResponse {
+  bool valid = 1;
+}
+message RefreshRequest {
+  string refresh_token = 1;
+}
+message RefreshResponse {
+  string access_token = 1;
+  string refresh_token = 2;
 }

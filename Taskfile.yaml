@@ -1,0 +1,9 @@
+version: "3"
+
+tasks:
+  generate:
+    aliases:
+      - gen
+    desc: "Generate protobuf files"
+    cmds:
+    - protoc -I=internal/data/proto --go_out=internal/data/gen --go-grpc_out=internal/data/gen internal/data/proto/*.proto
